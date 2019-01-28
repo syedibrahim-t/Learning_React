@@ -1,0 +1,11 @@
+@font-face {
+font-family: 'Cool jazz';
+font-style: normal;
+font-weight: normal;
+src: local('Cool jazz'), url('Cooljazz.woff') format('woff');
+}
+
+h1 {
+    font-family: 'Cool jazz';
+    color: rgb(79, 255, 140);
+}
