@@ -6,9 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'tachyons';
-import { searchRobots } from './reducer';
+import { searchPlayers } from './reducer';
 
-const store = createStore(searchRobots);
+const store = createStore(searchPlayers);
 
 ReactDOM.render(
     <Provider store={store} >
