@@ -16,6 +16,7 @@ class App extends Component {
     }
 
     componentDidMount(){
+        console.log(this.store.getState());
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(res => res.json())
         .then(players => this.setState({players: players}));
