@@ -8,6 +8,6 @@ export const searchPlayers = (state=initialState, action={}) => {
         case CHANGE_SEARCH_FIELD:
             return {...state, searchField: action.payload};
         default:
-        return state;
+            return state;
     }
 }
