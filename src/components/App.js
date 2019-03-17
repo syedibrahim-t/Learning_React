@@ -5,42 +5,36 @@ import Scroll from './Scroll';
 import './App.css';
 import { connect } from 'react-redux';
 import ErrorBoundry from './ErrorBoundry';
-import { setSearchField } from '../actions';
+import { setSearchField, requestPlayers } from '../actions';
 
 
 const mapStateToProps = state => {
     return {
-        searchField: state.searchField
+        searchField: state.searchPlayersReducer.searchField,
+        players: state.requestPlayersReducer.players,
+        isPending: state.requestPlayersReducer.isPending,
+        error: state.requestPlayersReducer.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+        onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onRequestPlayers: () => dispatch(requestPlayers())
     }
 }
 
 class App extends Component {
-    constructor(){
-        super();
-        this.state={
-            players: [],
-        }
-    }
-
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(res => res.json())
-        .then(players => this.setState({players: players}));
+        this.props.onRequestPlayers();
     }
 
     render(){
-        const { players } = this.state;
-        const { searchField, onSearchChange } = this.props;
+        const { searchField, onSearchChange, players, error, isPending } = this.props;
         const filteredPlayers = players.filter((player) => {
             return player.name.toLowerCase().includes(searchField.toLowerCase());
         });
-        return !players.length ? (<div className='tc'>
+        return isPending ? (<div className='tc'>
                                 <h2>Loading...</h2>
                             </div>) : (
             <div className='tc'>
